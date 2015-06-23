@@ -323,6 +323,7 @@ def index(self):
     &lt;a href="fileuploadform"&gt;上傳檔案&lt;/a&gt;&lt;br /&gt;
     &lt;a href="download_list"&gt;列出上傳檔案&lt;/a&gt;&lt;br /&gt;
     &lt;a href="man"&gt;機器人自動組立&lt;/a&gt;&lt;br /&gt;
+    &lt;a href="w17"&gt;齒輪囓合&lt;/a&gt;&lt;br /&gt;
     &lt;/body&gt;
     &lt;/html&gt;
     '''
@@ -1652,7 +1653,7 @@ y_g6 = y_g5 + rp_g5+rp_g6
 # 使用 ctx.save() 與 ctx.restore() 以確保各齒輪以相對座標進行旋轉繪圖
 
 ctx.font = "10px Verdana";
-ctx.fillText("組員:",x_g1-20, y_g1-10);
+ctx.fillText("40223115吳欣融繪製",x_g1-20, y_g1-10);
 
 ctx.save()
 # translate to the origin of second gear
@@ -1711,6 +1712,10 @@ spur.Spur(ctx).Gear(x_g4, y_g4, rp_g4, n_g4, pa, "black")
 ctx.restore()
 
 #第5齒輪
+
+ctx.font = "10px Verdana";
+ctx.fillText("組員:",x_g5-20, y_g5-10);
+
 ctx.save()
 # translate to the origin of second gear
 ctx.translate(x_g5, y_g5)
@@ -1722,6 +1727,9 @@ spur.Spur(ctx).Gear(x_g5, y_g5, rp_g5, n_g5, pa, "purple")
 ctx.restore()
 
 #第6齒輪
+ctx.font = "10px Verdana";
+ctx.fillText("組員:",x_g6-20, y_g6-10);
+
 ctx.save()
 # translate to the origin of second gear
 ctx.translate(x_g6, y_g6)

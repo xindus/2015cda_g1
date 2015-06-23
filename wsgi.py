@@ -108,6 +108,7 @@ class Hello(object):
         <a href="fileuploadform">上傳檔案</a><br />
         <a href="download_list">列出上傳檔案</a><br />
         <a href="man">機器人自動組立</a><br />
+        <a href="w17">齒輪囓合</a><br />
         </body>
         </html>
         '''
@@ -1263,7 +1264,7 @@ class Hello(object):
     # 使用 ctx.save() 與 ctx.restore() 以確保各齒輪以相對座標進行旋轉繪圖
 
     ctx.font = "10px Verdana";
-    ctx.fillText("組員:",x_g1-20, y_g1-10);
+    ctx.fillText("40223115吳欣融繪製",x_g1-20, y_g1-10);
 
     ctx.save()
     # translate to the origin of second gear
@@ -1322,6 +1323,10 @@ class Hello(object):
     ctx.restore()
 
     #第5齒輪
+
+    ctx.font = "10px Verdana";
+    ctx.fillText("組員:",x_g5-20, y_g5-10);
+
     ctx.save()
     # translate to the origin of second gear
     ctx.translate(x_g5, y_g5)
@@ -1333,6 +1338,9 @@ class Hello(object):
     ctx.restore()
 
     #第6齒輪
+    ctx.font = "10px Verdana";
+    ctx.fillText("組員:",x_g6-20, y_g6-10);
+
     ctx.save()
     # translate to the origin of second gear
     ctx.translate(x_g6, y_g6)
