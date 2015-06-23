@@ -1485,7 +1485,7 @@ def index(self, filepath):
 </t>
 <t tx="2015.20150623090701.1">@cherrypy.expose
 # N 為齒數, M 為模數, P 為壓力角
-def w17(self, N=20, N1=10, N2=30, N3=10, N4=20, N5=30, N6=30,M=5, P=15):
+def w17(self, N=20, N1=10, N2=30, N3=10, N4=20, N5=30, N6=30 , N7=15 ,M=5, P=15):
     outstring = '''
 &lt;!DOCTYPE html&gt; 
 &lt;html&gt;
@@ -1537,6 +1537,20 @@ def w17(self, N=20, N1=10, N2=30, N3=10, N4=20, N5=30, N6=30,M=5, P=15):
         outstring+=''' &lt;option value="'''+str(j)+'''"&gt;'''+str(j)+'''&lt;/option&gt;'''
     outstring+='''
    &lt;/select&gt;&lt;br/&gt;
+第7齒數:&lt;br /&gt;
+    &lt;select name="N6"&gt;
+    '''
+    for j in range(15,86):
+        outstring+=''' &lt;option value="'''+str(j)+'''"&gt;'''+str(j)+'''&lt;/option&gt;'''
+    outstring+='''
+   &lt;/select&gt;&lt;br/&gt;
+第8齒數:&lt;br /&gt;
+    &lt;select name="N7"&gt;
+    '''
+    for j in range(15,86):
+        outstring+=''' &lt;option value="'''+str(j)+'''"&gt;'''+str(j)+'''&lt;/option&gt;'''
+    outstring+='''
+   &lt;/select&gt;&lt;br/&gt;
 
 模數  :&lt;input type=text name=M value='''+str(M)+'''&gt;&lt;br /&gt;
 壓力角:&lt;input type=text name=P value = '''+str(P)+'''&gt;&lt;br /&gt;
@@ -1558,7 +1572,7 @@ brython();
 </t>
 <t tx="2015.20150623090709.1">@cherrypy.expose
 # N 為齒數, M 為模數, P 為壓力角
-def w17_test(self, N=20, N1=10, N2=30, N3=10, N4=20, N5=30, N6=30,M=15, P=15):
+def w17_test(self, N=20, N1=10, N2=30, N3=10, N4=20, N5=30, N6=30 , N7=15 , M=15, P=15):
     outstring = '''
 &lt;!DOCTYPE html&gt; 
 &lt;html&gt;
@@ -1578,10 +1592,12 @@ def w17_test(self, N=20, N1=10, N2=30, N3=10, N4=20, N5=30, N6=30,M=15, P=15):
 第4齒數:'''+str(N3)+'''&lt;output name=N3 for=str(N3)&gt;&lt;br /&gt;
 第5齒數:'''+str(N4)+'''&lt;output name=N4 for=str(N4)&gt;&lt;br /&gt;
 第6齒數:'''+str(N5)+'''&lt;output name=N5 for=str(N5)&gt;&lt;br /&gt;
+第7齒數:'''+str(N6)+'''&lt;output name=N6 for=str(N6)&gt;&lt;br /&gt;
+第8齒數:'''+str(N7)+'''&lt;output name=N7 for=str(N7)&gt;&lt;br /&gt;
 
 模數:'''+str(M)+'''&lt;output name=M for=str(M)&gt;&lt;br /&gt;
 壓力角:'''+str(P)+'''&lt;output name=P for=str(P)&gt;&lt;br /&gt;
-齒數比:'''+str(N)+''':'''+str(N1)+''':'''+str(N2)+''':'''+str(N3)+''':'''+str(N4)+''':'''+str(N5)+''':'''+str(N6)+'''&lt;br /&gt;
+齒數比:'''+str(N)+''':'''+str(N1)+''':'''+str(N2)+''':'''+str(N3)+''':'''+str(N4)+''':'''+str(N5)+''':'''+str(N6)+''':'''+str(N7)+'''&lt;br /&gt;
 
 &lt;!-- 以下為 canvas 畫圖程式 --&gt;
 &lt;script type="text/python"&gt;
@@ -1616,6 +1632,10 @@ n_g4 ='''+str(N3)+'''
 n_g5 ='''+str(N4)+'''
 # 第6齒輪齒數
 n_g6 ='''+str(N5)+'''
+# 第7齒輪齒數
+n_g7 ='''+str(N6)+'''
+# 第8齒輪齒數
+n_g8 ='''+str(N7)+'''
 
 
 # 計算兩齒輪的節圓半徑
@@ -1625,6 +1645,8 @@ rp_g3 = m*n_g3/2
 rp_g4 = m*n_g4/2
 rp_g5= m*n_g5/2
 rp_g6= m*n_g6/2
+rp_g7= m*n_g7/2
+rp_g8= m*n_g8/2
 
 # 繪圖第1齒輪的圓心座標
 x_g1 = 400
@@ -1648,6 +1670,14 @@ y_g5 = y_g4
 # 第6齒輪的圓心座標
 x_g6 = x_g5
 y_g6 = y_g5 + rp_g5+rp_g6
+
+# 第7齒輪的圓心座標
+x_g7 = x_g6+ rp_g6+rp_g7
+y_g7 = y_g6
+
+# 第8齒輪的圓心座標
+x_g8 = x_g7
+y_g8 = y_g7 + rp_g7+rp_g8
 
 # 將第1齒輪順時鐘轉 90 度
 # 使用 ctx.save() 與 ctx.restore() 以確保各齒輪以相對座標進行旋轉繪圖
@@ -1740,9 +1770,38 @@ ctx.translate(-x_g6, -y_g6)
 spur.Spur(ctx).Gear(x_g6, y_g6, rp_g6, n_g6, pa, "blue")
 ctx.restore()
 
+#第7齒輪
+
+ctx.font = "10px Verdana";
+ctx.fillText("組員:",x_g7-20, y_g7-10);
+
+ctx.save()
+# translate to the origin of second gear
+ctx.translate(x_g7, y_g7)
+# rotate to engage
+ctx.rotate(-pi/2-pi/n_g7+(pi/2+pi/n_g6)+(-pi/2+pi/n_g5)*n_g5/n_g7-(pi/2+pi/n_g4)*n_g4/n_g7-(pi/2+pi/n_g3)*n_g3/n_g7-(pi/2+pi/n_g2)*n_g2/n_g7)
+# put it back
+ctx.translate(-x_g7, -y_g7)
+spur.Spur(ctx).Gear(x_g7, y_g7, rp_g7, n_g7, pa, "purple")
+ctx.restore()
+ 
+#第8齒輪
+
+ctx.font = "10px Verdana";
+ctx.fillText("組員:",x_g8-20, y_g8-10);
+
+ctx.save()
+# translate to the origin of second gear
+ctx.translate(x_g8, y_g8)
+# rotate to engage
+ctx.rotate(-pi/2-pi/n_g8+(pi/2+pi/n_g7)+(-pi/2+pi/n_g6)*n_g6/n_g8+(-pi/2+pi/n_g5)*n_g5/n_g8-(pi/2+pi/n_g4)*n_g4/n_g8-(pi/2+pi/n_g3)*n_g3/n_g8-(pi/2+pi/n_g2)*n_g2/n_g8)
+# put it back
+ctx.translate(-x_g8, -y_g8)
+spur.Spur(ctx).Gear(x_g8, y_g8, rp_g8, n_g8, pa, "purple")
+ctx.restore()
 
 &lt;/script&gt;
-&lt;canvas id="plotarea" width="3000" height="3000"&gt;&lt;/canvas&gt;
+&lt;canvas id="plotarea" width="5000 " height="5000"&gt;&lt;/canvas&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 '''
